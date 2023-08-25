@@ -1,10 +1,21 @@
-# spatial join condizionato
+# Spatial Join Condizionato
 
 2023-08-25 Sfida di analisi spaziale
 
 Collega ciascuna scuola all'università più vicina nella stessa regione amministrativa.
 
 ![](https://pbs.twimg.com/media/F4Xs3mOb0AAeO6F?format=jpg&name=large)
+
+<!-- TOC -->
+
+- [Spatial Join Condizionato](#spatial-join-condizionato)
+  - [PASSO 1:](#passo-1)
+  - [PASSO 2:](#passo-2)
+  - [DATI e PROGETTO](#dati-e-progetto)
+- [RIFERIMENTI](#riferimenti)
+- [DISCLAIMER](#disclaimer)
+
+<!-- /TOC -->
 
 ## PASSO 1:
 
