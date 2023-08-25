@@ -37,6 +37,10 @@ nel generatore di geometrie:
 
 ![](imgs/img_01.png)
 
+## DATI e PROGETTO
+
+[DATI](./dati/)
+
 # RIFERIMENTI
 
 - <https://twitter.com/spatialthinkies/status/1695021747177951435/>
