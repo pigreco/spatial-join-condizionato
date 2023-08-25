@@ -56,6 +56,8 @@ nel generatore di geometrie:
 
 - <https://twitter.com/spatialthinkies/status/1695021747177951435/>
 - QGIS: https://www.qgis.org/it/site/
+- ISSUE: <https://github.com/qgis/QGIS/issues/43146>
+- SE: <https://gis.stackexchange.com/questions/391120/qgis-expression-with-overlay-fuction-filter-condition-based-on-comparison-of-at>
 
 
 # DISCLAIMER
