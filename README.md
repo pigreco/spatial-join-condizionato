@@ -13,7 +13,10 @@ Collega ciascuna scuola all'università più vicina nella stessa regione amminis
   - [PASSO 2:](#passo-2)
   - [DATI e PROGETTO](#dati-e-progetto)
   - [ALTRE ESPRESSIONI](#altre-espressioni)
+  - [RELAZIONE N:N](#relazione-nn)
+    - [TABELLA INTERMEDIA](#tabella-intermedia)
 - [RIFERIMENTI](#riferimenti)
+  - [video Youtube](#video-youtube)
 - [DISCLAIMER](#disclaimer)
 
 <!-- /TOC -->
@@ -62,6 +65,7 @@ make_line(@geometry,
             overlay_nearest('colleges',@feature,limit:=-1), 
             attribute( @element, 'IDp' ) = "IDp" )[0]))
 ```
+## RELAZIONE N:N
 
 Creando due relazione di progetto su `colleges` e `schools` (perché la relazione tra loro è N:N)
 
@@ -70,6 +74,14 @@ Creando due relazione di progetto su `colleges` e `schools` (perché la relazion
 ![](imgs/plugin.png)
 <https://github.com/pyarchinit/selectbyrelationship_repo>
 
+### TABELLA INTERMEDIA
+
+Nella tabella degli attributi delle `schools` aggiungo un attributo `c_osm_id` e lo popolo con l'espressione:
+
+```
+eval('overlay_nearest(\'colleges\',
+          osm_id,filter:=IDp='||"IDp"||')')[0]
+```
 
 ![](imgs/demo.gif)
 
@@ -82,6 +94,10 @@ vedi `progetto_rel`
 - ISSUE: <https://github.com/qgis/QGIS/issues/43146>
 - SE: <https://gis.stackexchange.com/questions/391120/qgis-expression-with-overlay-fuction-filter-condition-based-on-comparison-of-at>
 - Blog post Pigreconfinito: <https://pigrecoinfinito.com/2021/11/01/qgis-e-lo-spatial-join-condizionato/>
+
+## video Youtube
+
+[![](https://img.youtube.com/vi/G4e4bUxuMS0/0.jpg)](https://https://youtu.be/G4e4bUxuMS0 "Video")
 
 
 # DISCLAIMER
