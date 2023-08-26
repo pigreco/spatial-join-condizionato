@@ -81,6 +81,7 @@ vedi `progetto_rel`
 - QGIS: https://www.qgis.org/it/site/
 - ISSUE: <https://github.com/qgis/QGIS/issues/43146>
 - SE: <https://gis.stackexchange.com/questions/391120/qgis-expression-with-overlay-fuction-filter-condition-based-on-comparison-of-at>
+- Blog post Pigreconfinito: <https://pigrecoinfinito.com/2021/11/01/qgis-e-lo-spatial-join-condizionato/>
 
 
 # DISCLAIMER
