@@ -12,6 +12,7 @@ Collega ciascuna scuola all'università più vicina nella stessa regione amminis
   - [PASSO 1:](#passo-1)
   - [PASSO 2:](#passo-2)
   - [DATI e PROGETTO](#dati-e-progetto)
+  - [ALTRE ESPRESSIONI](#altre-espressioni)
 - [RIFERIMENTI](#riferimenti)
 - [DISCLAIMER](#disclaimer)
 
@@ -51,6 +52,28 @@ nel generatore di geometrie:
 ## DATI e PROGETTO
 
 [DATI](./dati/)
+
+## ALTRE ESPRESSIONI
+
+```
+make_line(@geometry,
+          geometry(
+            array_filter( 
+            overlay_nearest('colleges',@feature,limit:=-1), 
+            attribute( @element, 'IDp' ) = "IDp" )[0]))
+```
+
+Creando due relazione di progetto su `colleges` e `schools` (perché la relazione tra loro è N:N)
+
+![](imgs/img_03.png)
+
+![](imgs/plugin.png)
+<https://github.com/pyarchinit/selectbyrelationship_repo>
+
+
+![](imgs/demo.gif)
+
+vedi `progetto_rel`
 
 # RIFERIMENTI
 
