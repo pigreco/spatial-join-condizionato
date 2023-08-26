@@ -9,17 +9,23 @@ Collega ciascuna scuola all'università più vicina nella stessa regione amminis
 <!-- TOC -->
 
 - [Spatial Join Condizionato](#spatial-join-condizionato)
+- [Totò FIANDACA](#totò-fiandaca)
   - [PASSO 1:](#passo-1)
   - [PASSO 2:](#passo-2)
   - [DATI e PROGETTO](#dati-e-progetto)
   - [ALTRE ESPRESSIONI](#altre-espressioni)
   - [RELAZIONE N:N](#relazione-nn)
     - [TABELLA INTERMEDIA](#tabella-intermedia)
+- [Reymar SANCHEZ](#reymar-sanchez)
+  - [QUERY](#query)
+- [Bert Temme](#bert-temme)
 - [RIFERIMENTI](#riferimenti)
   - [video Youtube](#video-youtube)
 - [DISCLAIMER](#disclaimer)
 
 <!-- /TOC -->
+
+# Totò FIANDACA
 
 ## PASSO 1:
 
@@ -87,6 +93,50 @@ eval('overlay_nearest(\'colleges\',
 
 vedi `progetto_rel`
 
+# Reymar SANCHEZ
+
+<https://twitter.com/SanchezReymar/status/1695078310198280503/>
+
+Dati caricati in PostgreSQL/PostGIS
+
+## QUERY
+
+```SQL
+-- AGGIUNGO shapename DI admin_boundaries A colleges
+
+ALTER TABLE colleges ADD COLUMN shapename varchar (100);
+
+UPDATE colleges a SET shapename = b."shapeName"
+FROM admin_boundaries b
+WHERE ST_Contains (b.geom, a.geom);
+
+-- AGGIUNGO shapename DI admin_boundaries A schools
+
+ALTER TABLE schools ADD COLUMN shapename varchar (100);
+
+UPDATE schools a SET shapename = b."shapeName" 
+FROM admin_boundaries b
+WHERE ST_Contains (b.geom, a.geom);
+
+-- NEAREST
+
+SELECT osm_id,schools,colleges,ST_Makeline(ageom,bgeom) geom
+    FROM (
+    SELECT a.osm_id,a.name schools, b.name colleges, 
+        row_number() over (partition by a.osm_id ORDER BY ST_Distance (a.geom,b.geom)) r, 
+        a.geom ageom, b.geom bgeom
+    FROM schools a JOIN colleges b ON ST_DWithin (a.geom,b.geom,1)
+    WHERE a."shapename" = b."shapename") t
+WHERE r = 1;
+```
+
+![](imgs/pg.png)
+
+# Bert Temme
+
+repo: <https://github.com/bertt/spatial_analysis_challenge/blob/main/README.md>
+
+![](https://user-images.githubusercontent.com/538812/263313387-2685612d-c48c-43f9-83dd-4dd386d7478c.png)
 # RIFERIMENTI
 
 - <https://twitter.com/spatialthinkies/status/1695021747177951435/>
