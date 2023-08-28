@@ -19,6 +19,8 @@ Collega ciascuna scuola all'università più vicina nella stessa regione amminis
 - [Reymar SANCHEZ](#reymar-sanchez)
   - [QUERY](#query)
 - [Bert Temme](#bert-temme)
+- [Postholer - GIS Resources](#postholer---gis-resources)
+- [MAHESH KUMAR](#mahesh-kumar)
 - [RIFERIMENTI](#riferimenti)
   - [video Youtube](#video-youtube)
 - [DISCLAIMER](#disclaimer)
@@ -26,6 +28,11 @@ Collega ciascuna scuola all'università più vicina nella stessa regione amminis
 <!-- /TOC -->
 
 # Totò FIANDACA
+
+Strumento:
+
+1. QGIS desktop
+2. Espressioni di QGIS
 
 ## PASSO 1:
 
@@ -95,6 +102,11 @@ vedi `progetto_rel`
 
 # Reymar SANCHEZ
 
+Strumento:
+
+1. PostgreSQL/PostGIS
+2. SQL
+
 <https://twitter.com/SanchezReymar/status/1695078310198280503/>
 
 Dati caricati in PostgreSQL/PostGIS
@@ -134,9 +146,82 @@ WHERE r = 1;
 
 # Bert Temme
 
+<https://twitter.com/berttemme/status/1695090882247082239>
+
+Strumento:
+
+1. duckDB
+2. SQL
+
 repo: <https://github.com/bertt/spatial_analysis_challenge/blob/main/README.md>
 
 ![](https://user-images.githubusercontent.com/538812/263313387-2685612d-c48c-43f9-83dd-4dd386d7478c.png)
+
+# Postholer - GIS Resources
+
+<https://twitter.com/postholer/status/1696047017490030692>
+
+Strumento:
+
+1. bash;
+2. GDAL/OGR
+3. SQL
+
+```bash
+ogr20gr -nln paths -dialect sqlite -sql
+"SELECT
+  r.*
+FROM
+  (
+    SELECT
+      b.shapeID AS admin,
+      c.osm_id AS college,
+      s.osm_id AS school,
+      makeline(c.geom, s.geom) AS linegeom,
+      st_length (makeline(c.geom, s.geom)) AS linelen
+    FROM
+      admin boundaries b
+      JOIN (
+        SELECT
+          (ROW_NUMBER() OVER()) AS fid,
+          *
+        FROM
+          colleges
+      ) c ON st_intersects(c.geom, b.geom)
+      JOIN (
+        SELECT
+          (ROW_NUMBER() OVER()) AS fid,
+          *
+        FROM
+          schools
+      ) s ON st_intersects(s.geom, b.geom)
+    GROUP BY
+      b.shapeName,
+      c.fid,
+      s.fid
+    ORDER BY
+      linelen asc
+  ) r
+GROUP BY
+  r.school"
+newdata.gpkg layers.gpkg
+```
+
+![](https://pbs.twimg.com/media/F4mRlhyaAAAwjDx?format=png&name=large)
+
+![](https://pbs.twimg.com/media/F4mRm7SacAANkD1?format=jpg&name=large)
+
+# MAHESH KUMAR
+
+Strumento:
+
+1. QGIS desktop
+2. espressioni di QGIS
+
+```
+make_line ($geometry, geometry(get:feature('colleges', 'fid', array_filter(aggregate(layer:='colleges',aggregate:='array_agg',expression:=geomnearest('colleges,'fid'), filter:="admin" = attribute(@parent,'admin'),order_by:0distance($geometry,geometry(@parent)))))))
+```
+
 # RIFERIMENTI
 
 - <https://twitter.com/spatialthinkies/status/1695021747177951435/>
