@@ -29,6 +29,8 @@ Collega ciascuna scuola all'università più vicina nella stessa regione amminis
 
 # Totò FIANDACA
 
+<https://twitter.com/totofiandaca/status/1695093176304812192>
+
 Strumento:
 
 1. QGIS desktop
@@ -155,6 +157,8 @@ Strumento:
 
 repo: <https://github.com/bertt/spatial_analysis_challenge/blob/main/README.md>
 
+PS: non ho verificato!!!
+
 ![](https://user-images.githubusercontent.com/538812/263313387-2685612d-c48c-43f9-83dd-4dd386d7478c.png)
 
 # Postholer - GIS Resources
@@ -167,8 +171,8 @@ Strumento:
 2. GDAL/OGR
 3. SQL
 
-```bash
-ogr20gr -nln paths -dialect sqlite -sql
+```sh
+ogr2ogr -nln paths -dialect sqlite -sql
 "SELECT
   r.*
 FROM
@@ -213,14 +217,22 @@ newdata.gpkg layers.gpkg
 
 # MAHESH KUMAR
 
+<https://twitter.com/MAHESHK92842090/status/1696112436678734058>
+
 Strumento:
 
 1. QGIS desktop
-2. espressioni di QGIS
+2. plugin [RefFunction](https://plugins.qgis.org/plugins/refFunctions/) dreprecato
+3. espressioni di QGIS
 
 ```
 make_line ($geometry, geometry(get:feature('colleges', 'fid', array_filter(aggregate(layer:='colleges',aggregate:='array_agg',expression:=geomnearest('colleges,'fid'), filter:="admin" = attribute(@parent,'admin'),order_by:0distance($geometry,geometry(@parent)))))))
 ```
+PS: non ho verificato!!!
+
+![](https://pbs.twimg.com/media/F4nNNw9bEAAC4en?format=jpg&name=small)
+
+![](https://pbs.twimg.com/media/F4nNPQ7aAAApwyh?format=jpg&name=900x900)
 
 # RIFERIMENTI
 
