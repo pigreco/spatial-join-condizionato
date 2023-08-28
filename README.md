@@ -4,6 +4,8 @@
 
 Collega ciascuna scuola all'università più vicina nella stessa regione amministrativa.
 
+Thread: <https://treeverse.app/view/xlb1zSBR>
+
 ![](https://pbs.twimg.com/media/F4Xs3mOb0AAeO6F?format=jpg&name=large)
 
 <!-- TOC -->
